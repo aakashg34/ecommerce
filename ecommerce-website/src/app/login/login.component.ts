@@ -11,17 +11,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = 'aakash';
-  password: string = 'aakash';
-
-  constructor(private router: Router) {}
-
-  login() {
-    // Implement actual authentication logic here
-    if (this.username === 'user' && this.password === 'password') {
-      this.router.navigate(['/catalog']);
-    } else {
-      alert('Invalid credentials');
-    }
-  }
+  
 }
