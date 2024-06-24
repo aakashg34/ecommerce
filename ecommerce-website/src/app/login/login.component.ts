@@ -1,27 +1,38 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+// import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
-  imports: [],
+  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
+  // providers: [AuthService],  // Ensure HttpClient and AuthService are provided
+  imports: [CommonModule, FormsModule]
 })
 export class LoginComponent {
-  username: string = 'aakash';
-  password: string = 'aakash';
+  username: string = '';
+  password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, 
+    // private authService: AuthService
+  ) {}
 
   login() {
-    // Implement actual authentication logic here
-    if (this.username === 'user' && this.password === 'password') {
-      this.router.navigate(['/catalog']);
-    } else {
-      alert('Invalid credentials');
-    }
+    
+    // this.authService.login(this.username, this.password).subscribe(
+    //   response => {
+    //     if (response) {
+    //       this.router.navigate(['/catalog']);
+    //     } else {
+    //       alert('Invalid credentials');
+    //     }
+    //   },
+    //   error => {
+    //     alert('Login failed');
+    //   }
+    // );
   }
 }
