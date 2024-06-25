@@ -38,7 +38,7 @@ export class LoginComponent {
 
   login() {
     
-  console.log(this.loginForm.value)
+  // console.log(this.loginForm.value)
     this.http.post(this.api, this.loginForm.value, { responseType: 'text' })
     .subscribe(
         response  => {

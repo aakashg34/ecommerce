@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class Product {
+public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,10 @@ public class Product {
     private String name;
     private String description;
     private Double price;
+    private Double rating;
+    private String category;
+
+
 
     public String getName() {
         return name;
@@ -44,7 +48,19 @@ public class Product {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
