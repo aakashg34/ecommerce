@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterModule, LoginComponent,ReactiveFormsModule]
 })
 export class AppComponent {
-  title = 'ecommerce-website';
+  title = 'e-commerce-app';
 }
