@@ -1,38 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 // import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+// import { response } from 'express';
+
 
 @Component({
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  // providers: [AuthService],  // Ensure HttpClient and AuthService are provided
-  imports: [CommonModule, FormsModule]
+  providers: [HttpClient],  // Ensure HttpClient and AuthService are provided
+  imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
+@Injectable({providedIn : 'root'})
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
+  loginForm: FormGroup;
+  username: string = "";
+  password: string = "";
+  api = "http://localhost:8080/api/login"
+  errorMessage: string ='';
 
-  constructor(private router: Router, 
+  data = {username : this.username, password : this.password}
+  constructor(private router: Router,
+    private http:HttpClient ,
+    private fb: FormBuilder
     // private authService: AuthService
-  ) {}
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
 
   login() {
     
-    // this.authService.login(this.username, this.password).subscribe(
-    //   response => {
-    //     if (response) {
-    //       this.router.navigate(['/catalog']);
-    //     } else {
-    //       alert('Invalid credentials');
-    //     }
-    //   },
-    //   error => {
-    //     alert('Login failed');
-    //   }
-    // );
+  console.log(this.loginForm.value)
+    this.http.post(this.api, this.loginForm.value, { responseType: 'text' })
+    .subscribe(
+        response  => {
+        
+          if (response === 'Login Successful') {
+            // Navigate to home page on successful login
+            this.router.navigate(['/catalog']);
+          } else {
+            
+            this.errorMessage = 'Invalid username or password';
+          }
+        },
+        error => {
+          this.errorMessage = 'An error occurred. Please try again.';
+        }
+      );
   }
 }
