@@ -1,1 +1,226 @@
-<p>product-catalog works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .logo p {
+            font-size: 24px;
+            color: #556b2f;
+        }
+        .cart {
+            display: flex;
+            align-items: center;
+        }
+        .cart-button {
+            background-color: #556b2f;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .cart-button:hover {
+            background-color: #4b5b2e;
+        }
+        .cart-button .cart-text {
+            margin-right: 10px;
+        }
+        .page-heading {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .page-heading .items {
+            font-size: 36px;
+        }
+        .divider {
+            width: 80%;
+            height: 1px;
+            background-color: #ddd;
+            margin: 10px auto;
+        }
+        .chip-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .chip-default, .chip-az, .chip-list {
+            border: 1px solid #ddd;
+            background-color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .chip-default:hover, .chip-az:hover, .chip-list:hover {
+            background-color: #f0f0f0;
+        }
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 250px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+        .product-info {
+            padding: 10px;
+        }
+        .product-info h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .product-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .add-to-cart {
+            background-color: #556b2f;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .add-to-cart:hover {
+            background-color: #4b5b2e;
+        }
+        .pagination-container {
+            text-align: center;
+            padding: 20px;
+        }
+        .pagination-container .nav-button {
+            cursor: pointer;
+            font-size: 24px;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="navigation">
+            <div class="logo position-relative">
+                <p>Company Logo</p>
+            </div>
+            <div class="cart position-relative">
+                <button class="cart-button" onclick="navigateToCart()">
+                    <span class="cart-text">My Cart (0)</span>
+                    <img src="https://cdn-icons-png.freepik.com/512/1413/1413908.png" alt="Cart Icon" class="image-12">
+                </button>
+            </div>
+        </header>
+        
+        <main>
+            <div class="page-heading position-relative">
+                <div class="items">Items</div>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="chip-container position-relative">
+                <button class="chip-default">Filters</button>
+                <button class="chip-az">
+                    <span class="az-text">A-Z</span>
+                </button>
+                <button class="chip-list">
+                    <span class="list-view">List view</span>
+                </button>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card tomato position-relative">
+                    <img src="https://planaplant.com/cdn/shop/products/MoneyPlantGolden1_1200x1200_crop_center.jpg?v=1636616627" alt="Golden Money Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Golden Money Plant</h3>
+                        <p class="price">₹599 / piece</p>
+                        <p class="description">Grown in Aravali Hills</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card peperomia position-relative">
+                    <img src="https://www.ugaoo.com/cdn/shop/products/GroPot_4b6b2ac9-aba9-4077-9d36-7c1c6265efe9.jpg?v=1707727788&width=1500" alt="Peperomia Green Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Peperomia Green Plant</h3>
+                        <p class="price">₹299 / piece</p>
+                        <p class="description">Grown in Himachal Pradesh</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card spider position-relative">
+                    <img src="https://m.media-amazon.com/images/I/51xLNVn5kML._AC_UF1000,1000_QL80_.jpg" alt="Spider Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Spider Plant</h3>
+                        <p class="price">₹199 / piece</p>
+                        <p class="description">Grown in Uttarakhand</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card anthurium position-relative">
+                    <img src="https://club.global.flowers/upload/iblock/508/uiu0axbiuop8ys7vs4hkot3ktarcc5mu/116237.webp" alt="Anthurium Chotolate Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Anthurium Chotolate Plant</h3>
+                        <p class="price">₹499 / piece</p>
+                        <p class="description">Grown in Hills of Western Ghat</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                <!-- Product Card 5 -->
+                <div class="product-card portulaca position-relative">
+                    <img src="https://nurserylive.com/cdn/shop/products/nurserylive-g-portulaca-oleracea-10-O-clock-pink-plant.jpg?v=1634226669" alt="Portulaca Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Portulaca Plant</h3>
+                        <p class="price">₹399 / piece</p>
+                        <p class="description">Grown in Himachal Pradesh</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                <!-- Product Card 6 -->
+                <div class="product-card dragon position-relative">
+                    <img src="https://i.ebayimg.com/images/g/GzIAAOSwZgtiO2EX/s-l400.jpg" alt="Dragon Fruit Plant" class="product-image">
+                    <div class="product-info">
+                        <h3 class="name">Dragon Fruit Plant</h3>
+                        <p class="price">₹549 / piece</p>
+                        <p class="description">Grown in Uttarakhand</p>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="pagination-container position-relative">
+            <div class="nav-button left">&#171;</div>
+            <div class="page-number">Page Number: 02</div>
+            <div class="nav-button right">&#187;</div>
+        </footer>
+    </div>
+
+    <script>
+        function navigateToCart() {
+            // Logic to navigate to cart page
+            window.location.href = '/cart';
+        }
+    </script>
+</body>
+</html>
