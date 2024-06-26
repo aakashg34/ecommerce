@@ -52,10 +52,13 @@ export class ProductCatalogComponent implements OnInit {
   }
 
   filterProducts(): void {
+    console.log(this.selectedCategories.length+"lenght of selected categories")
     if (this.selectedCategories.length > 0) {
       this.productService.getProductsByCategories(this.selectedCategories).subscribe(data => {
         this.products = data;
       });
+    }else if (this.selectedCategories.length == 0){
+      this.fetchProducts();
     }
   }
   onCategoryChange(): void {
