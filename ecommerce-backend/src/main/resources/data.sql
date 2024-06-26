@@ -1,4 +1,4 @@
--- src/main/resources/data.sql
+ -- src/main/resources/data.sql
 
 -- Insert initial users
 INSERT INTO users (username, password) VALUES ('user1', '$2a$10$u1/QRm1USc5t6o/U6or3OeLk6X1G1kEq9I3K3Vz3zJZ9QvTnPt.Ky'); -- password: password1

@@ -1,5 +1,7 @@
 -- Create the User table
+create database ecommerce
 
+use ecommerce;
 
 
 CREATE TABLE users (
