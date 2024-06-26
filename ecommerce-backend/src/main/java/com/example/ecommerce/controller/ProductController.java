@@ -31,4 +31,20 @@ public class ProductController {
        productRepository.save(product);
        return "Product Saved";
     }
+
+    @GetMapping("/products/{category}")
+    public List<Products> getProductsFromCategoryName(@PathVariable String category) {
+       return productRepository.findByCategory(category);
+    }
+
+    @GetMapping("/categories")
+    public List<Products> getProductsByCategories(@RequestParam List<String> categories) {
+        return productService.getProductsByCategories(categories);
+    }
+
+    @GetMapping("/categories-list")
+    public List<String> getCategories() {
+        return productService.getCategories();
+    }
+
 }

@@ -18,4 +18,17 @@ public class ProductService {
     public List<Products> getAllProducts() {
         return productRepository.findAll();
     }
+
+    public List<Products> getProductsByCategoryName(String category){
+        return (List<Products>) productRepository.findByCategory(category);
+    }
+
+    public List<Products> getProductsByCategories(List<String> categories) {
+        return productRepository.findByCategoryIn(categories);
+    }
+
+    public List<String> getCategories() {
+        return productRepository.findDistinctCategories();
+    }
+
 }

@@ -1,40 +1,70 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog</title>
     <link rel="stylesheet" href="../../styles.css">
-</head>
+</head> -->
 <body>
     <div class="container">
         <div class="navigation">
-            <div class="logo">Company Logo</div>
+            <div class="logo">Company Logo
+                <img class="logo" src= "companyLogo">
+            </div>
             <div class="cart-button">
                 <div class="cart-text">My Cart (0)</div>
+                <div>
+                    Welcome {{ username }}
+                </div>
             </div>
         </div>
         <div class="page-heading">
             <h1 class="items">Items</h1>
-            <div class="filters">Filters</div>
-            <div class="chip-default">Category</div>
+           
+            <div class="filters">
+                <mat-form-field appearance="fill">
+                  <mat-label>Categories</mat-label>
+                  <mat-select [multiple]="true" [(value)]="selectedCategories" (selectionChange)="onCategoryChange()">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                      {{ category }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            
             <div class="chip-az">A-Z</div>
             <div class="chip-list">List view</div>
         </div>
         <div class="product-grid" id="product-grid">
             <!-- Use Angular's ngFor directive to iterate over the products -->
             <div class="product-card" *ngFor="let product of paginatedProducts">
-                <div class="product-image" [ngStyle]="{'background-image': 'url(' + product.imageUrl + ')'}"></div>
+                <div class="product-image" >
+                    <img [src]="product.imageURL"  style="width: 100px; height: 150px;" alt="{{ product.name }} Image">
+                </div>
+                <!-- [ngStyle]="{'background-image': 'url(' + product.imageURL + ')'}" -->
                 <div class="product-info">
                     <div class="name">{{ product.name }}</div>
-                    <div class="price">{{ product.price }}</div>
+                    <div class="price">${{ product.price }}</div>
                     <div class="description">{{ product.description }}</div>
                     <div class="category">{{ product.category }}</div>
-                    <div class="rating">{{ product.rating }}</div>
-                    <div class="add-to-cart">Add to Cart</div>
+                    <div class="rating"> {{ product.rating }}</div>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="star"></mat-icon>
+                    <div class="add-to-cart">
+                        <!-- <button> -->
+                        Add to Cart
+
+                    <!-- </button> -->
+                </div>
                 </div>
             </div>
         </div>
+<!-- 
+        <mat-paginator [length]="100"
+              [pageSize]="10"
+             
+              aria-label="Select page">
+        </mat-paginator> -->
         <div class="pagination">
             <button class="nav-button left" (click)="prevPage()">&lt;&lt;</button>
             <div class="page-number" id="page-number">Page Number: {{ currentPage }}</div>
@@ -42,4 +72,4 @@
         </div>
     </div>
 </body>
-</html>
+<!-- </html> -->

@@ -15,7 +15,8 @@ CREATE TABLE products (
     rating DOUBLE NOT NULL,
     category VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
+    price DECIMAL(10, 2) NOT NULL,
+    imageURL VARCHAR(1000)
 );
 
 

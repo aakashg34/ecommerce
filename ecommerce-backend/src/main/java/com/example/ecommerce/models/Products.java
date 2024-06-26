@@ -17,8 +17,17 @@ public class Products {
     private Double price;
     private Double rating;
     private String category;
+    private String imageURL;
 
-
+//    public Products(Long id, String name, String description, Double price, Double rating, String category, String imageURL) {
+//        this.id = id;
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.rating = rating;
+//        this.category = category;
+//        this.imageURL = imageURL;
+//    }
 
     public String getName() {
         return name;
@@ -58,6 +67,14 @@ public class Products {
 
     public String getCategory() {
         return category;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public void setCategory(String category) {

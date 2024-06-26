@@ -19,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent {
   loginForm: FormGroup;
   username: string = "";
+  static user = ""
   password: string = "";
   api = "http://localhost:8080/api/login"
   errorMessage: string ='';
@@ -44,6 +45,7 @@ export class LoginComponent {
         response  => {
         
           if (response === 'Login Successful') {
+            // LoginComponent.user = 
             // Navigate to home page on successful login
             this.router.navigate(['/catalog']);
           } else {
@@ -55,5 +57,8 @@ export class LoginComponent {
           this.errorMessage = 'An error occurred. Please try again.';
         }
       );
+  }
+  getUserName(){
+    return this.username;
   }
 }
