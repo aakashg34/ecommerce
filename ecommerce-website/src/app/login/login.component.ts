@@ -19,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent {
   loginForm: FormGroup;
   username: string = "";
+  static user = ""
   password: string = "";
   api = "http://localhost:8080/api/login"
   errorMessage: string ='';
@@ -38,12 +39,13 @@ export class LoginComponent {
 
   login() {
     
-  console.log(this.loginForm.value)
+  // console.log(this.loginForm.value)
     this.http.post(this.api, this.loginForm.value, { responseType: 'text' })
     .subscribe(
         response  => {
         
           if (response === 'Login Successful') {
+            // LoginComponent.user = 
             // Navigate to home page on successful login
             this.router.navigate(['/catalog']);
           } else {
@@ -55,5 +57,8 @@ export class LoginComponent {
           this.errorMessage = 'An error occurred. Please try again.';
         }
       );
+  }
+  getUserName(){
+    return this.username;
   }
 }
