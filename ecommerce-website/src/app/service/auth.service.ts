@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router'
 
 export interface User {
   id: number;
@@ -15,7 +16,8 @@ export interface User {
 export class AuthService {
   private api = 'http://localhost:8080/api/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router : Router) {}
 
   login(username: string, password: string) {
     // const headers = new HttpHeaders({ 'Content-Type': 'text' });
@@ -28,5 +30,11 @@ export class AuthService {
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    this.router.navigate(['/']);
   }
 }

@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { CartService } from '../service/cart.service';
 import { Router } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
+import { UserService } from '../service/user.service';
+import { AuthService } from '../service/auth.service';
 
 // interface Products {
 //   name: string;
@@ -34,38 +36,56 @@ export class ProductCatalogComponent implements OnInit {
 
   products: Products[] = [];  // This will hold the products fetched from the backend
   cartProducts : Products[] = [];
+  cartLength : number = 0;
   categories: string[] = [];
   selectedCategories: string[] = [];
   currentPage = 1;
   itemsPerPage = 6;
   username : string = "";
-  userId : number = 1;
+  userId: number | null = null ;
   api = "http://localhost:8080/api/products"
   companyLogo : string = "src/assets/logo.png"
+  filteredProducts: number | undefined;
   constructor(private http : HttpClient,
     private router: Router,
     private login: LoginComponent,
     private productService: ProductService,
-    private cartService : CartService) { }
+    private cartService : CartService,
+    private userService : UserService,
+    private authService : AuthService) { }
 
   ngOnInit(): void {
     this.fetchProducts(); 
-    // console.log(this.login.getUserName())
-    // this.username = this.login.username
-    // console.log(this.username+"hihihih") ;// Fetch products when the component initializes
+    
+    const storedUserId = localStorage.getItem('userId');
+    this.userId = storedUserId ? parseInt(storedUserId, 10) : null;
+    // Fetch products when the component initializes
     this.productService.getCategories().subscribe(data => {
       // console.log(data);
       this.categories = data;
     });
-
-    this.cartService.getCartItems(1).subscribe((items) => (this.cartProducts = items));
+    this.username = this.userService.getUsername();
+    if (this.userId !== null) {
+      this.cartService.getCartItems(this.userId).subscribe(
+        (items: Products[]) => {
+          this.cartProducts = items;
+        },
+        error => {
+          console.error('Error fetching cart items:', error);
+        }
+      );
+    }else if (this.userId === null) {
+      
+    }
+    // this.cartService.getCartItems(1).subscribe((items) => (this.cartProducts = items));
   }
 
   filterProducts(): void {
-    console.log(this.selectedCategories.length+"lenght of selected categories")
+    // console.log(this.selectedCategories.length+"lenght of selected categories")
     if (this.selectedCategories.length > 0) {
       this.productService.getProductsByCategories(this.selectedCategories).subscribe(data => {
         this.products = data;
+        this.filteredProducts = this.products.length
       });
     }else if (this.selectedCategories.length == 0){
       this.fetchProducts();
@@ -89,7 +109,7 @@ export class ProductCatalogComponent implements OnInit {
 
     this.http.get<Products[]>(this.api).subscribe(
       (response : Products[]) => 
-        {console.log(response)
+        {
         this.products = response
         }
     )
@@ -102,11 +122,24 @@ export class ProductCatalogComponent implements OnInit {
     return this.products.slice(start, end);
   }
   addToCart(product: Products): void {
+    if(this.userId !== null){
     this.cartService.addToCart(this.userId, product);
+    console.log(this.cartProducts)
+    alert("Product added to cart")
+    } else {
+      console.error('User ID is null, Cannot add to product');
+    }
   }
 
+  
+
   removeFromCart(product: Products): void {
+    if(this.userId !== null) {
     this.cartService.removeFromCart(this.userId, product);
+    this.isInCart(product)
+    }else {
+      console.error('User ID is null, cannot add to product')
+    }
   }
 
   isInCart(product: Products): boolean {
@@ -128,5 +161,9 @@ export class ProductCatalogComponent implements OnInit {
 
   goToCart() {
     this.router.navigate(['/cart']);
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

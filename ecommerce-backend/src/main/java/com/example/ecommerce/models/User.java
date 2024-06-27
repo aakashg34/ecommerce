@@ -20,6 +20,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    private String address;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Carts> carts = new HashSet<>();
 
@@ -53,5 +55,13 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

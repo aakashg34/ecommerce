@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../service/auth.service';
+import { UserService } from '../service/user.service';
 // import { response } from 'express';
 
 
@@ -13,6 +14,12 @@ export interface User {
   id: number;
   username: string;
   password : string;
+}
+
+export interface LoginResponse {
+  message: string;
+  userId: number | null;
+  address : string;
 }
 
 @Component({
@@ -36,8 +43,8 @@ export class LoginComponent {
   constructor(private router: Router,
     private http:HttpClient ,
     private fb: FormBuilder,
-    private authService: AuthService
-  ) {
+    private authService: AuthService,
+    private userService : UserService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -47,13 +54,19 @@ export class LoginComponent {
 
   login() {
 
-    this.http.post(this.api, this.loginForm.value, { responseType: 'text' })
+    this.http.post<LoginResponse>(this.api, this.loginForm.value)
     .subscribe(
         response  => {
        
-          if (response === 'Login Successful') {
+          if (response.message === 'Login Successful' && response.userId !== null) {
             // LoginComponent.user =
+            const username = this.loginForm.value.username
+
+            console.log(response)
             // Navigate to home page on successful login
+            this.userService.setUsername(username); 
+            this.userService.setAddress(response.address)
+            localStorage.setItem('userId', response.userId.toString());
             this.router.navigate(['/catalog']);
           } else {
            
