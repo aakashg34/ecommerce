@@ -8,6 +8,9 @@ import {MatCheckboxModule} from  '@angular/material/checkbox';
 import { LoginComponent } from '../login/login.component';
 import { ProductService, Products } from '../service/product.service';
 import { MatSelectModule } from '@angular/material/select';
+import { CartService } from '../service/cart.service';
+import { Router } from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
 
 // interface Products {
 //   name: string;
@@ -24,21 +27,25 @@ import { MatSelectModule } from '@angular/material/select';
   providers: [HttpClient],
   templateUrl: './product-catalog.component.html',
   styleUrls: ['./product-catalog.component.css'],
-  imports: [CommonModule,MatIconModule,MatPaginatorModule,LoginComponent,MatCheckboxModule,MatSelectModule] // Add CommonModule here
+  imports: [CommonModule,MatIconModule,MatPaginatorModule,LoginComponent,MatCheckboxModule,MatSelectModule,MatButtonModule] // Add CommonModule here
 })
 export class ProductCatalogComponent implements OnInit {
 
   products: Products[] = [];  // This will hold the products fetched from the backend
+  cartProducts : Products[] = [];
   categories: string[] = [];
   selectedCategories: string[] = [];
   currentPage = 1;
   itemsPerPage = 6;
   username : string = "";
+  userId : number = 1;
   api = "http://localhost:8080/api/products"
   companyLogo : string = "src/assets/logo.png"
   constructor(private http : HttpClient,
+    private router: Router,
     private login: LoginComponent,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private cartService : CartService) { }
 
   ngOnInit(): void {
     this.fetchProducts(); 
@@ -46,9 +53,11 @@ export class ProductCatalogComponent implements OnInit {
     // this.username = this.login.username
     // console.log(this.username+"hihihih") ;// Fetch products when the component initializes
     this.productService.getCategories().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.categories = data;
     });
+
+    this.cartService.getCartItems(1).subscribe((items) => (this.cartProducts = items));
   }
 
   filterProducts(): void {
@@ -91,6 +100,18 @@ export class ProductCatalogComponent implements OnInit {
     const end = start + this.itemsPerPage;
     return this.products.slice(start, end);
   }
+  addToCart(product: Products): void {
+    this.cartService.addToCart(this.userId, product);
+  }
+
+  removeFromCart(product: Products): void {
+    this.cartService.removeFromCart(this.userId, product);
+  }
+
+  isInCart(product: Products): boolean {
+    return this.cartProducts.some((cartProduct) => cartProduct.id === product.id);
+  }
+
 
   nextPage(): void {
     if (this.currentPage * this.itemsPerPage < this.products.length) {
@@ -102,5 +123,9 @@ export class ProductCatalogComponent implements OnInit {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 }

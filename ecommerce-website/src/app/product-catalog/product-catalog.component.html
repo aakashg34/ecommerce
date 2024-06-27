@@ -9,18 +9,21 @@
 <body>
     <div class="container">
         <div class="navigation">
-            <div class="logo">Company Logo
-                <img class="logo" src= "companyLogo">
+            <div class="logo">
+                <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 200px; height:170px" class= "logo" >
             </div>
-            <div class="cart-button">
-                <div class="cart-text">My Cart (0)</div>
-                <div>
-                    Welcome {{ username }}
+            <div >
+                <div class="cart-text">
+                    <button class="cart-button cart-text" (click)="goToCart()">My Cart</button> 
                 </div>
+            
+                        <!-- <div>
+                            Welcome {{ username }}
+                        </div> -->
+               </div> 
             </div>
-        </div>
         <div class="page-heading">
-            <h1 class="items">Items</h1>
+            <h1 class="items">Products</h1>
            
             <div class="filters">
                 <mat-form-field appearance="fill">
@@ -48,14 +51,36 @@
                     <div class="price">${{ product.price }}</div>
                     <div class="description">{{ product.description }}</div>
                     <div class="category">{{ product.category }}</div>
-                    <div class="rating"> {{ product.rating }}</div>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="star"></mat-icon>
-                    <div class="add-to-cart">
-                        <!-- <button> -->
-                        Add to Cart
+                    <div class="rating"> {{ product.rating }}
+                        
+                    </div>
 
-                    <!-- </button> -->
-                </div>
+                    <!-- <section>
+                        <div class="example-button-row">
+                          <div class="example-flex-container">
+                            <div class="example-button-container">
+                                <button mat-fab (click)="addToCart(product)">Add to Cart</button>
+
+                                <div class="example-button-container">
+                                    <button *ngIf="isInCart(product)" (click)="removeFromCart(product)" mat-fab aria-label="Example icon button with a delete icon">
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                </div>
+                            
+                             
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </section> -->
+                    
+                    <!-- <div class="add-to-cart"> -->
+                        <button class="add-to-cart" (click)="addToCart(product)">Add to Cart</button>
+                        <div class="example-button-container">
+                            
+                          </div>
+                        <button *ngIf="isInCart(product)" (click)="removeFromCart(product)">Remove from Cart</button>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
