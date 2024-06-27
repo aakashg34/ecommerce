@@ -1,100 +1,58 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Catalog</title>
-    <link rel="stylesheet" href="../../styles.css">
-</head> -->
 <body>
     <div class="container">
-        <div class="navigation">
-            <div class="logo">
-                <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 200px; height:170px" class= "logo" >
-            </div>
-            <div >
-                <div class="cart-text">
-                    <button class="cart-button cart-text" (click)="goToCart()">My Cart</button> 
-                </div>
-            
-                        <!-- <div>
-                            Welcome {{ username }}
-                        </div> -->
-               </div> 
-            </div>
-        <div class="page-heading">
-            <h1 class="items">Products</h1>
-           
-            <div class="filters">
-                <mat-form-field appearance="fill">
-                  <mat-label>Categories</mat-label>
-                  <mat-select [multiple]="true" [(value)]="selectedCategories" (selectionChange)="onCategoryChange()">
-                    <mat-option *ngFor="let category of categories" [value]="category">
-                      {{ category }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            
-            <!-- <div class="chip-az">A-Z</div>
-            <div class="chip-list">List view</div> -->
+      <div class="navigation">
+        <div class="logo">
+          <img
+            src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg"
+            style="width: 200px; height:170px"
+            class="logo"
+          >
         </div>
-        <div class="product-grid" id="product-grid">
-            <!-- Use Angular's ngFor directive to iterate over the products -->
-            <div class="product-card" *ngFor="let product of paginatedProducts">
-                <div class="product-image" >
-                    <img [src]="product.imageURL"  style="width: 100px; height: 150px;" alt="{{ product.name }} Image">
-                </div>
-                <!-- [ngStyle]="{'background-image': 'url(' + product.imageURL + ')'}" -->
-                <div class="product-info">
-                    <div class="name">{{ product.name }}</div>
-                    <div class="price">${{ product.price }}</div>
-                    <div class="description">{{ product.description }}</div>
-                    <div class="category">{{ product.category }}</div>
-                    <div class="rating"> {{ product.rating }}
-                        
-                    </div>
-
-                    <!-- <section>
-                        <div class="example-button-row">
-                          <div class="example-flex-container">
-                            <div class="example-button-container">
-                                <button mat-fab (click)="addToCart(product)">Add to Cart</button>
-
-                                <div class="example-button-container">
-                                    <button *ngIf="isInCart(product)" (click)="removeFromCart(product)" mat-fab aria-label="Example icon button with a delete icon">
-                                        <mat-icon>delete</mat-icon>
-                                      </button>
-                                </div>
-                            
-                             
-                            </div>
-                            
-                          </div>
-                        </div>
-                      </section> -->
-                    
-                    <!-- <div class="add-to-cart"> -->
-                        <button class="add-to-cart" (click)="addToCart(product)">Add to Cart</button>
-                        <div class="example-button-container">
-                            
-                          </div>
-                        <button *ngIf="isInCart(product)" (click)="removeFromCart(product)">Remove from Cart</button>
-                    <!-- </div> -->
-                </div>
+        <div>
+          <div class="user-controls">
+            <button class="mycart-button" (click)="goToCart()">My Cart</button>
+            <button class="logout-button" (click)="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+      <div class="page-heading">
+        <h1 class="items">Welcome, {{ username }}</h1>
+        <!-- <span class="filtered-products">Showing {{filteredProducts}} out of {{this.products.length}}</span> -->
+        <div class="filters">
+          <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select [multiple]="true" [(value)]="selectedCategories" (selectionChange)="onCategoryChange()">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <span class="filtered-products">Showing {{filteredProducts}} out of {{this.products.length}}</span>
+      <div class="product-grid" id="product-grid">
+        
+        <div class="product-card" *ngFor="let product of paginatedProducts">
+          <div class="product-image">
+            <img [src]="product.imageURL" style="width: 100px; height: 150px;" alt="{{ product.name }} Image">
+          </div>
+          <div class="product-info">
+            <div class="name">{{ product.name }}</div>
+            <div class="price">${{ product.price }}</div>
+            <div class="description">{{ product.description }}</div>
+            <div class="category">{{ product.category }}</div>
+            <div class="rating">{{ product.rating }}</div>
+            <div class="button-container">
+              <button class="cart-button" (click)="addToCart(product)">Add to Cart</button>
             </div>
+          </div>
         </div>
-<!-- 
-        <mat-paginator [length]="100"
-              [pageSize]="10"
-             
-              aria-label="Select page">
-        </mat-paginator> -->
-        <div class="pagination">
-            <button class="nav-button left" (click)="prevPage()">&lt;&lt;</button>
-            <div class="page-number" id="page-number">Page Number: {{ currentPage }}</div>
-            <button class="nav-button right" (click)="nextPage()">&gt;&gt;</button>
-        </div>
+      </div>
+      <div class="pagination">
+        <button class="nav-button left" (click)="prevPage()">&lt;&lt;</button>
+        <div class="page-number" id="page-number">Page Number: {{ currentPage }}</div>
+        <button class="nav-button right" (click)="nextPage()">&gt;&gt;</button>
+      </div>
     </div>
-</body>
-<!-- </html> -->
+  </body>
+  

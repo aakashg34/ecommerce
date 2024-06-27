@@ -23,10 +23,38 @@ body {
     width: 1440px;
     margin: auto;
     background: #FFFFFF;
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cart-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    max-width: 150px; /* Adjust max-width as needed */
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.cart-button:last-child {
+    margin-right: 0;
+}
+
+.cart-button:hover {
+    background-color: darkgreen;
+}
+
   .page-heading {
     height: 149px;
     background: #FFFFFF;
@@ -201,7 +229,7 @@ body {
     justify-content: center;
     width: 120px;
   }
-  .add-to-cart {
+  /* .add-to-cart {
     background: #426B1F;
     border-radius: 20px;
     padding: 10px;
@@ -211,8 +239,20 @@ body {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 16px;
-  }
-  
+  } */
+  .logout-button {
+    background-color: #3399aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.logout-button:hover {
+    background-color: #70b6c3;
+}
   .pagination {
     display: flex;
     justify-content: center;
@@ -240,3 +280,56 @@ body {
     margin: 0 20px;
     color: #000000;
   }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between the buttons */
+}
+
+.cart-button {
+    background-color: #008cba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.cart-button:hover {
+    background-color: #005f5f;
+}
+
+.logout-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+}
+
+.mycart-button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+.mycart-button:hover {
+  background-color: #005f5f;
+}

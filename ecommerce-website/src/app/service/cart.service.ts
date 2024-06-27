@@ -34,12 +34,25 @@ export class CartService {
     return this.cartTotalSubject.asObservable();
   }
 
+  // addToCart(userId: number, product: Product): Observable<void> {
+  //   return this.http.post<void>(`${this.apiUrl}/${userId}/add/${product.id}`, {});
+  // }
+
+  addToCartProd(userId: number, product: Product): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${userId}/add/${product.id}`, {});
+  }
+  
+  // removeFromCart(userId: number, product: Product): Observable<void> {
+  //   return this.http.delete<void>(`${this.apiUrl}/${userId}/remove/${product.id}`);
+  // }
+
   addToCart(userId: number, product: Product): void {
     this.http.post<Product[]>(`${this.apiUrl}/${userId}/add/${product.id}`, {}).subscribe((cartItems) => {
       this.cartItems = cartItems;
       this.cartTotal = this.cartItems.reduce((total, item) => total + item.price, 0);
       this.cartItemsSubject.next(this.cartItems);
       this.cartTotalSubject.next(this.cartTotal);
+      this.updateCartTotal();
     });
   }
 
@@ -50,5 +63,10 @@ export class CartService {
       this.cartItemsSubject.next(this.cartItems);
       this.cartTotalSubject.next(this.cartTotal);
     });
+  }
+
+  private updateCartTotal():void {
+    const total = this.cartItems.reduce((sum, item) => sum + item.price, 0);
+    this.cartTotalSubject.next(total);
   }
 }
