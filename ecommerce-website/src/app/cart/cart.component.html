@@ -1,13 +1,26 @@
 <div class="cart-container">
-    <h2>Your Cart</h2>
+    <div class="header">
+        <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 200px; height:170px" class= "logo" >
+
+      <div class="cart-info">
+        <button class="cart-button">Basket ({{ cartItems.length }})</button>
+      </div>
+    </div>
+    <h2>Basket <span>{{ cartItems.length }} items</span></h2>
     <div *ngFor="let item of cartItems; let i = index" class="cart-item">
-      <span>{{ i + 1 }}.</span>
-      <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image">
-      <span>{{ item.name }}</span>
-      <span>${{ item.price }}</span>
+      <div class="item-number">{{ i + 1 }}.</div>
+      <img [src]="item.imageURL" alt="{{ item.name }}" class="item-image">
+      <div class="item-details">
+        <div class="item-name">{{ item.name }}</div>
+        <div class="item-price">${{ item.price }}</div>
+      </div>
     </div>
-    <div class="cart-total">
-      <h3>Total: ${{ getTotal() }}</h3>
+    <div class="order-summary">
+      <h3>Order summary</h3>
+      <div>Subtotal <span>${{ cartTotal }}</span></div>
+      <div>Shipping <span>$3.99</span></div>
+      <div>Tax <span>$2.00</span></div>
+      <div>Total <span>${{ cartTotal  }}</span></div>
+      <button class="checkout-button" (click)="checkout()">Checkout</button>
     </div>
-    <button class="checkout-button" (click)="checkout()">Checkout</button>
   </div>
