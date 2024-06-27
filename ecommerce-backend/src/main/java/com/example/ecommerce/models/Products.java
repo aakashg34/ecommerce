@@ -1,9 +1,9 @@
 package com.example.ecommerce.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -28,6 +28,8 @@ public class Products {
 //        this.category = category;
 //        this.imageURL = imageURL;
 //    }
+    @ManyToMany(mappedBy = "products")
+    private Set<Carts> carts = new HashSet<>();
 
     public String getName() {
         return name;
