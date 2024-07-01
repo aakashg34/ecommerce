@@ -4,6 +4,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f0f8f0;
+    
 }
 
 .box-sizing {
@@ -25,6 +27,7 @@ body {
     background: #FFFFFF;
     /* border: 1px solid #000000; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* background-color: #f0f8f0; */
   }
   
   .button-container {
@@ -273,6 +276,31 @@ body {
     cursor: pointer;
   }
   
+  .nav-button-left {
+    background-color: #2d409fc3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .nav-button-right{
+    background-color: #2d409fc3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+  }
+  .nav-button-left:hover {
+    background-color: #2d409f;
+}
+.nav-button-right:hover {
+  background-color: #2d409f;
+}
   .page-number {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -294,7 +322,7 @@ body {
 }
 
 .cart-button {
-    background-color: #008cba;
+    background-color: #2d409f;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -304,11 +332,11 @@ body {
 }
 
 .cart-button:hover {
-    background-color: #005f5f;
+    background-color: #2d409fb5;
 }
 
 .logout-button {
-    background-color: #f44336;
+    background-color: #436b1fdd;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -318,11 +346,11 @@ body {
 }
 
 .logout-button:hover {
-    background-color: #d32f2f;
+    background-color: #436b1fa7;
 }
 
 .mycart-button {
-  background-color: #008cba;
+  background-color: #2d409f;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -331,5 +359,27 @@ body {
   transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
 }
 .mycart-button:hover {
-  background-color: #005f5f;
+  background-color: #2d409fc8;
+}
+
+.filtered-products{
+  padding-left: 30px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.star-icon {
+  color: gold; /* Change color as desired */
+  font-size: 20px; /* Adjust size as needed */
+  vertical-align: middle; /* Align icon vertically with text */
+  padding-top: 3px;
 }
