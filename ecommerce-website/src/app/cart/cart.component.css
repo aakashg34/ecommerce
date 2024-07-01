@@ -1,0 +1,191 @@
+.cart-container {
+    padding: 20px;
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #f0f8f0;
+
+  }
+ 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+ 
+  .header h1 {
+    font-size: 24px;
+    color: #426B1F;
+  }
+ 
+  .cart-info .cart-button {
+    background-color: #426B1F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+ 
+  h2 {
+    font-size: 24px;
+  }
+ 
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+ 
+  .cart-item .item-number {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+ 
+  .cart-item .item-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+ 
+  .cart-item .item-details {
+    flex-grow: 1;
+  }
+ 
+  .cart-item .item-name {
+    font-size: 18px;
+  }
+ 
+  .cart-item .item-price {
+    font-size: 16px;
+    color: #426B1F;
+  }
+ 
+  .order-summary {
+    margin-top: 20px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+  }
+ 
+  .order-summary h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+ 
+  .order-summary div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+ 
+  .checkout-button {
+    background-color: #426B1F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .checkout-button:hover {
+    background-color: #436b1fc2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  .user-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between the buttons */
+}
+
+.cart-button {
+    background-color: #2d409f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.cart-button:hover {
+    background-color: #2d409fe5;
+}
+
+.logout-button {
+    background-color: #436b1fdd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.logout-button:hover {
+    background-color: #436b1fa7;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #2d409f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* font-size: 16px; */
+    transition: background-color 0.3s ease;
+  }
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-button {
+    background-color: #2d409f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.empty-cart-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .empty-cart-container h1 {
+    font-size: 24px;
+    color: #333;
+  }
+
+  .delete-button {
+    background-color: #2d409f;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}

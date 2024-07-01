@@ -1,1 +1,45 @@
-<p>cart works!</p>
+<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCartMessage">
+  <!-- <button class="back-button" style="margin-bottom:  1%;" (click)="goBack()">Back</button> -->
+  <div class="header">
+    <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 200px; height:170px" class="logo">
+    <div class="user-controls">
+      <!-- <button class="cart-button cart-text">My Cart ({{cartItems.length}})</button> -->
+      <button class="cart-button cart-text" (click)="goBack()">Continue Shopping</button>
+
+      <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+  </div>
+  <!-- <h2>Basket <span>{{ cartItems.length }} items</span></h2> -->
+  <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+    <div class="item-number">{{ i + 1 }}.</div>
+    <img [src]="item.imageURL" alt="{{ item.name }}" class="item-image">
+    <div class="item-details">
+      <div class="item-name">{{ item.name }}</div>
+      <div class="item-price">Rs {{ item.formattedPrice }} /-</div>
+    </div>
+    <button class="delete-button" (click)="removeFromCart(item)"><mat-icon class="delete" aria-hidden="false">delete</mat-icon></button>
+
+    <!-- class="cart-button"  -->
+  </div>
+  <div class="order-summary">
+    <h3>Order summary</h3>
+    <div>Subtotal <span>Rs {{ formattedPrice }} /-</span></div>
+    <div>Shipping - Free <span> (- Rs 0.00)</span></div>
+    <div>Tax <span>Rs 0.00</span></div>
+    <div>
+      <h3>Total</h3> <span><h3>Rs {{ formattedPrice }}/-</h3></span></div>
+    <div class="address-field">
+      <label for="address" >Delivery Address</label>
+      <input id="address" type="text" [value]="address" style="width:220px;text-align: right;" disabled>
+    </div>
+    <button class="checkout-button" (click)="checkout()">Checkout</button>
+  </div>
+</div>
+<ng-template #emptyCartMessage>
+  <div class="empty-cart-container">
+    
+    <h1> You don't have any products in the basket</h1>
+    <button class="back-button" style="position: relative;" (click)="goBack()">Continue Shopping</button>
+  </div>
+  
+</ng-template>

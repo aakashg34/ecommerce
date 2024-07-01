@@ -1,0 +1,385 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f8f0;
+    
+}
+
+.box-sizing {
+    box-sizing: border-box;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+/* Container */
+.container {
+    width: 1440px;
+    margin: auto;
+    background: #FFFFFF;
+    /* border: 1px solid #000000; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* background-color: #f0f8f0; */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cart-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    max-width: 150px; /* Adjust max-width as needed */
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.cart-button:last-child {
+    margin-right: 0;
+}
+
+.cart-button:hover {
+    background-color: darkgreen;
+}
+
+  .page-heading {
+    height: 149px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .filters {
+    cursor: pointer;
+  }
+  
+  .chip-default,
+  .chip-az,
+  .chip-list {
+    width: 88px;
+    height: 40px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .chip-default {
+    background: #426B1F;
+    color: #FFFFFF;
+  }
+  
+  .chip-az,
+  .chip-list {
+    background: #FFFFFF;
+    border: 1px solid #C2C2C2;
+    color: #000000;
+  }
+  
+  .items {
+    font-family: 'Newsreader', serif;
+    font-size: 64px;
+    color: #000000;
+  }
+  
+  .navigation {
+    height: 112px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 36px;
+    color: #426B1F;
+  }
+  
+  .cart-button {
+    background: #426B1F;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .cart-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  
+  .product-card {
+    background: #FAFAF5;
+    border: 2px solid #E6E6E6;
+    border-radius: 24px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+  }
+  
+  .product-info {
+    margin-top: 10px;
+  }
+  
+  .product-info .name,
+  .product-info .price,
+  .product-info .description,
+  .product-info .category,
+  .product-info .rating {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .product-info .name {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+  }
+  
+  .product-info .price {
+    font-weight: 600;
+    font-size: 20px;
+    color: #426B1F;
+  }
+  
+  .product-info .description {
+    font-weight: 400;
+    font-size: 16px;
+    color: #6D6D6D;
+  }
+  
+  .product-info .category,
+  .product-info .rating {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+  }
+
+
+  section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+ 
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  /* .add-to-cart {
+    background: #426B1F;
+    border-radius: 20px;
+    padding: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+  } */
+  .logout-button {
+    background-color: #3399aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.logout-button:hover {
+    background-color: #70b6c3;
+}
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .nav-button {
+    width: 44px;
+    height: 42px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    cursor: pointer;
+  }
+  
+  .nav-button-left {
+    background-color: #2d409fc3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .nav-button-right{
+    background-color: #2d409fc3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+  }
+  .nav-button-left:hover {
+    background-color: #2d409f;
+}
+.nav-button-right:hover {
+  background-color: #2d409f;
+}
+  .page-number {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 20px;
+    color: #000000;
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between the buttons */
+}
+
+.cart-button {
+    background-color: #2d409f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.cart-button:hover {
+    background-color: #2d409fb5;
+}
+
+.logout-button {
+    background-color: #436b1fdd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+
+.logout-button:hover {
+    background-color: #436b1fa7;
+}
+
+.mycart-button {
+  background-color: #2d409f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Optional: Add transition for smoother hover effect */
+}
+.mycart-button:hover {
+  background-color: #2d409fc8;
+}
+
+.filtered-products{
+  padding-left: 30px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.star-icon {
+  color: gold; /* Change color as desired */
+  font-size: 20px; /* Adjust size as needed */
+  vertical-align: middle; /* Align icon vertically with text */
+  padding-top: 3px;
+}

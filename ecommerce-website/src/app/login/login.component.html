@@ -1,1 +1,19 @@
-<p> login works hey there</p>
+<div class="login-container">
+  <div class="login-form">
+    <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 100px; height:100px" alt="Logo" class="logo">
+    <h2>Welcome Back!</h2>
+    <p>Please login to your account.</p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="Enter your username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+    </form>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
+</div>
