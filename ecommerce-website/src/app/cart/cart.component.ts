@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../service/cart.service';
 import { Observable } from 'rxjs';
-import { Products } from '../service/product.service';
+import { ProductService, Products } from '../service/product.service';
 import { AuthService } from '../service/auth.service';
 import { UserService } from '../service/user.service';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
  
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatIconModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
@@ -20,12 +21,15 @@ export class CartComponent implements OnInit {
   cartItems: Products[] = [];
   cartTotal :number =0;
   userId: number | null = 0;
-  address: string = ''; 
+  address: string = '';
+  formattedPrice ?: string;
+
   constructor(
     private cartService: CartService,
     private authService : AuthService,
     private userService : UserService,
     private orderService : OrderService,
+    private productService : ProductService,
     private router : Router
   ) {}
   ngOnInit(): void {
@@ -35,7 +39,7 @@ export class CartComponent implements OnInit {
     //   });
 
       // this.getTotal();
-      const storedUserId = localStorage.getItem('userId');
+    const storedUserId = localStorage.getItem('userId');
     this.userId = storedUserId ? parseInt(storedUserId, 10) : null;
     this.loadCartItems();
     this.subscribeToCartTotal();
@@ -64,6 +68,7 @@ export class CartComponent implements OnInit {
     if(this.userId != null){
     this.cartService.getCartItems(this.userId).subscribe(
       (items: Products[]) => {
+        console.log(items)
         this.cartItems = items;
         this.cartService['cartItems'] = items; // Ensuring the cartService has the latest items
         this.cartService['updateCartTotal']();  // Recalculate the cart total
@@ -77,7 +82,8 @@ export class CartComponent implements OnInit {
   private subscribeToCartTotal(): void {
     this.cartService.getCartTotal().subscribe(
       (total: number) => {
-        this.cartTotal = total;
+        this.cartTotal = (total);
+        this.formattedPrice = this.formatPriceINR(this.cartTotal)
         console.log('Cart Total:', this.cartTotal); // Optional: Log to check if data is received
       },
       (error) => {
@@ -98,6 +104,7 @@ export class CartComponent implements OnInit {
   }
   updateCartTotal(): void {
     this.cartTotal = this.cartItems.reduce((total, item) => total + item.price, 0);
+    this.formattedPrice = this.formatPriceINR(this.cartTotal)
   }
 
  
@@ -111,11 +118,13 @@ export class CartComponent implements OnInit {
         address: this.address
       }
       this.orderService.placeOrder(orderRequest).subscribe(() => {
-
-        this.cartItems = [];
-        this.cartTotal = 0;
-        alert('Order placed successfully!');
-       this.router.navigate(['/catalog'], { queryParams: { orderPlaced: true } });
+        this.cartService.clearCart(orderRequest.userId).subscribe(() => {
+          this.cartItems = []; // Clear local cart items array
+          this.cartTotal = 0; // Reset cart total
+          alert('Order placed successfully!');
+          this.router.navigate(['/catalog']); // Navigate to catalog or any other page
+        });
+    
       });
 
         
@@ -141,6 +150,15 @@ export class CartComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
+  }
+  goBack(): void {
+    this.router.navigate(['/catalog']); // Adjust the route as needed
+  }
+
+  formatPriceINR(price: number): string {
+    return price.toLocaleString('en-IN', {
+      maximumFractionDigits: 0, // Adjust as needed, 0 for no decimal places
+    });
   }
 
 }

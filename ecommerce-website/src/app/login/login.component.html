@@ -1,24 +1,16 @@
-<!-- login.component.html -->
 <div class="login-container">
   <div class="login-form">
-    <img src ="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 100px; height:100px" alt="Logo" class="logo" >
+    <img src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg" style="width: 100px; height:100px" alt="Logo" class="logo">
     <h2>Welcome Back!</h2>
-    <p>Please login to your account</p>
+    <p>Please login to your account.</p>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="username" formControlName="username" placeholder="Enter your username">
-        <!-- <div *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched" class="error">
-          Username is required
-        </div> -->
-        <!-- <img [src]="product.imageURL"  style="width: 100px; height: 150px;" alt="{{ product.name }} Image"> -->
       </div>
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" formControlName="password" placeholder="Enter your password">
-        <!-- <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="error">
-          Password is required
-        </div> -->
       </div>
       <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
     </form>

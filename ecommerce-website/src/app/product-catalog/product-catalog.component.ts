@@ -32,7 +32,7 @@ import { AuthService } from '../service/auth.service';
   imports: [CommonModule,MatIconModule,MatPaginatorModule,LoginComponent,MatCheckboxModule,MatSelectModule,MatButtonModule] // Add CommonModule here
 })
 export class ProductCatalogComponent implements OnInit {
-
+  totalProducts : string = ''
   products: Products[] = [];  // This will hold the products fetched from the backend
   cartProducts : Products[] = [];
   cartLength : number = 0;
@@ -43,7 +43,6 @@ export class ProductCatalogComponent implements OnInit {
   username : string = "";
   userId: number | null = null ;
   api = "http://localhost:8080/api/products"
-  companyLogo : string = "src/assets/logo.png"
   filteredProducts: number | undefined;
   constructor(private http : HttpClient,
     private router: Router,
@@ -55,6 +54,11 @@ export class ProductCatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts(); 
+
+    // this.productService.getProducts().subscribe(products => {
+    //   this.products = products;
+    // });
+  
     
     const storedUserId = localStorage.getItem('userId');
     this.userId = storedUserId ? parseInt(storedUserId, 10) : null;
@@ -64,6 +68,7 @@ export class ProductCatalogComponent implements OnInit {
       this.categories = data;
     });
     this.username = this.userService.getUsername();
+    this.username = this.toFirstLetterUpperCase(this.username);
     if (this.userId !== null) {
       this.cartService.getCartItems(this.userId).subscribe(
         (items: Products[]) => {
@@ -74,7 +79,8 @@ export class ProductCatalogComponent implements OnInit {
         }
       );
     }else if (this.userId === null) {
-      
+      alert("User is not loggedIn Please Login")
+      this.router.navigate(['/login'])
     }
     // this.cartService.getCartItems(1).subscribe((items) => (this.cartProducts = items));
   }
@@ -104,14 +110,22 @@ export class ProductCatalogComponent implements OnInit {
   // }
 
   fetchProducts(): void {
+  
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+      this.filteredProducts = this.products.length;
+      this.totalProducts = JSON.stringify(this.products.length)
+    });
     
+    // this.http.get<Products[]>(this.api).subscribe(
+    //   (response : Products[]) => 
+    //     {
+    //     this.products = response  
+    //     this.filteredProducts = undefined;
+    //     this.totalProducts = JSON.stringify(this.products.length)
+    //     }
+    // )
 
-    this.http.get<Products[]>(this.api).subscribe(
-      (response : Products[]) => 
-        {
-        this.products = response
-        }
-    )
 
   }
 
@@ -165,4 +179,11 @@ export class ProductCatalogComponent implements OnInit {
   logout(): void {
     this.authService.logout();
   }
+
+  toFirstLetterUpperCase(str: string): string {
+    // Split the string by spaces or underscores
+    return str.replace(/^./, str[0].toUpperCase())
+  }
+
+  
 }

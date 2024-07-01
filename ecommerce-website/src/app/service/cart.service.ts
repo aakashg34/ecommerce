@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, of, map } from 'rxjs';
+import { ProductService, Products } from './product.service';
 
 interface Product {
   id: number;
@@ -10,6 +11,7 @@ interface Product {
   category: string;
   rating: number;
   imageURL: string;
+  formattedPrice?: string;
 }
 
 @Injectable({
@@ -22,12 +24,22 @@ export class CartService {
   private cartTotalSubject = new BehaviorSubject<number>(this.cartTotal);
   private apiUrl = 'http://localhost:8080/api/cart'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private productService :ProductService
+  ) {}
 
   getCartItems(userId :number): Observable<Product[]> {
     let params = new HttpParams();
     params.append('userId',userId)
-    return this.http.get<Product[]>(`${this.apiUrl}/${userId}`);
+    return this.http.get<Product[]>(`${this.apiUrl}/${userId}`).pipe(
+      map((products: Products[]) =>
+        products.map((product: Products) => {
+          product.price = Math.round(product.price*83); // Ensure price is rounded to 0 decimal places
+          product.formattedPrice = this.productService.formatPriceINR(product.price); // Add a new property for formatted price
+          return product;
+        })
+      )
+    );
   }
 
   getCartTotal(): Observable<number> {
@@ -67,6 +79,22 @@ export class CartService {
 
   private updateCartTotal():void {
     const total = this.cartItems.reduce((sum, item) => sum + item.price, 0);
+    const formattedTotal = this.formatPriceINR(total);
     this.cartTotalSubject.next(total);
+  }
+
+  clearCart(userId: number)  {
+    const url = `http://localhost:8080/api/${userId}/clear-cart`; // Adjust URL as per your backend API
+     return this.http.delete(url).pipe(
+      catchError((error) => {
+        console.error('Error clearing cart:', error);
+        return of(null); // Handling error gracefully
+      })
+    );
+  }
+  formatPriceINR(price: number): string {
+    return price.toLocaleString('en-IN', {
+      maximumFractionDigits: 0, // Adjust as needed, 0 for no decimal places
+    });
   }
 }
